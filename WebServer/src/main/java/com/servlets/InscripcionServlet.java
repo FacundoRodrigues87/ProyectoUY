@@ -24,6 +24,7 @@ public class InscripcionServlet extends HttpServlet {
         inscripcionController = new InscripcionController();
     }
 
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -32,15 +33,7 @@ public class InscripcionServlet extends HttpServlet {
         }
     }
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action");
-        if ("calcularCosto".equals(action)) {
-            calcularCosto(request, response);
-        }
-    }
-
-    private void crearInscripcion(HttpServletRequest request, HttpServletResponse response) throws IOException {
+     private void crearInscripcion(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             LocalDate fecha = LocalDate.parse(request.getParameter("fecha"));
             int cantidad = Integer.parseInt(request.getParameter("cant"));
@@ -55,6 +48,14 @@ public class InscripcionServlet extends HttpServlet {
         } catch (ParametrosInvalidosExcepcion | UsuarioYaExisteExcepcion | UsuarioNoExisteExcepcion | NumberFormatException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             response.getWriter().write("Error al crear la inscripción: " + e.getMessage());
+        }
+    }
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if ("calcularCosto".equals(action)) {
+            calcularCosto(request, response);
         }
     }
 

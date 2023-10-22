@@ -15,13 +15,14 @@ import java.time.LocalDate;
 
 @WebServlet("/UserServlet")
 public class UserServlet extends HttpServlet {
+
     private static final long serialVersionUID = 1L;
 
     private IUsuarioController userController;
 
     public UserServlet() {
         super();
-        userController = new UsuarioController(); 
+        userController = new UsuarioController();
 
     }
 
